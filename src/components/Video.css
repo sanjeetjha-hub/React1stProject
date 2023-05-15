@@ -1,0 +1,15 @@
+.title{
+    font-weight: bold;
+    margin-bottom: 1em;
+    color: white;
+}
+.channel, .view{
+    font-size: small;
+    color: #ccc;
+    margin-bottom: 0.2em;
+}
+.container {
+    width: 11em;
+    float: left;
+    margin: 0 0.2em;
+}
