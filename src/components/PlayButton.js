@@ -1,6 +1,7 @@
+import { useState } from "react";
 import "./PLayButton.css";
-function PlyButton({ children, onPlay, onPause }) {
-  let play = false;
+function PlyButton({ onPlay, onPause }) {
+  const [play, setPlay] = useState(false);
 
   function handleClick(e) {
     e.stopPropagation();
@@ -11,11 +12,11 @@ function PlyButton({ children, onPlay, onPause }) {
       onPlay();
     }
 
-    play = !play;
+    setPlay(!play);
   }
   return (
     <>
-      <button onClick={handleClick}>{children}</button>
+      <button onClick={handleClick}>{play ? "Pause ⏸️" : "Play ▶️"}</button>
     </>
   );
 }

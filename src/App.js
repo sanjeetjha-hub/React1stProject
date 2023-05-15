@@ -1,32 +1,20 @@
 import "./App.css";
 import "./components/Video";
-import Video from "./components/Video";
-import videos from "./data/data";
-import PlayButton from "./components/PlayButton";
+import videoDB from "./data/data";
+import { useState } from "react";
+import AddVideo from "./components/AddVideo";
+import VideoList from "./components/VideoList";
 
 export default function Gallery() {
+  const [videos, setVideos] = useState(videoDB);
+
+  function addVideos(video) {
+    setVideos([...videos, { ...video, id: videos.length + 1 }]);
+  }
   return (
     <div className="App">
-      <h1>Videos</h1>
-      {videos.map((video) => (
-        <Video
-          key={video.id}
-          id={video.id}
-          title={video.title}
-          channel={video.views}
-          views={video.time}
-          time={video.time}
-          verified={video.verified}
-        ></Video>
-      ))}
-      <div style={{ clear: "both" }}>
-        <PlayButton
-          onPlay={() => console.log("play")}
-          onPause={() => console.log("pause")}
-        >
-          Play
-        </PlayButton>
-      </div>
+      <AddVideo addVideos={addVideos}></AddVideo>
+      <VideoList videos={videos}></VideoList>
     </div>
   );
 }
