@@ -9,7 +9,17 @@
     margin-bottom: 0.2em;
 }
 .container {
+    position: relative;
     width: 11em;
     float: left;
     margin: 0 0.2em;
+}
+
+.close{
+    position: absolute;
+    right: 1em;
+}
+.edit{
+    position: absolute;
+    right: 3em;
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./AddVideo.css";
 
 const initialState = {
@@ -8,17 +8,25 @@ const initialState = {
   title: "",
   views: "",
 };
-function AddVideo({ addVideos }) {
+function AddVideo({ addVideos, editableVideo, updateVideo }) {
   const [video, SetVideo] = useState(initialState);
 
   function handleSubmit(e) {
     e.preventDefault();
-    addVideos(video);
+    if (editableVideo) {
+      updateVideo(video);
+    } else {
+      addVideos(video);
+    }
+
     SetVideo(initialState);
   }
   function handleChange(e) {
     SetVideo({ ...video, [e.target.name]: e.target.value });
   }
+  useEffect(() => {
+    if (editableVideo) SetVideo(editableVideo);
+  }, [editableVideo]);
   return (
     <form>
       <input
@@ -35,7 +43,9 @@ function AddVideo({ addVideos }) {
         placeholder="views"
         value={video.views}
       ></input>
-      <button onClick={handleSubmit}>Add Videos</button>
+      <button onClick={handleSubmit}>
+        {editableVideo ? "edit Video" : "Add Videos"}
+      </button>
     </form>
   );
 }
