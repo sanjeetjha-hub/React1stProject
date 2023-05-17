@@ -5,6 +5,8 @@ import { useReducer, useState } from "react";
 import AddVideo from "./components/AddVideo";
 import VideoList from "./components/VideoList";
 import ThemeContext from "./Context/ThemeContext";
+import VideosContext from "./Context/VideosContext";
+import VideoDispatchContext from "./Context/VideoDispatchContext";
 
 export default function Gallery() {
   const [editableVideo, setEditableVideo] = useState(null);
@@ -30,46 +32,42 @@ export default function Gallery() {
   const [videos, dispatch] = useReducer(videoReducer, videoDB);
   // const [videos, setVideos] = useState(videoDB);
 
-  function addVideos(video) {
-    dispatch({ type: "ADD", payload: video });
-    // setVideos([[...videos, { ...video, id: videos.length + 1 }]])
-  }
-  function deleteVideo(id) {
-    dispatch({ type: "DELETE", payload: id });
-    // setVideos(videos.filter((video) => video.id !== id));
-  }
+  // function addVideos(video) {
+  //   dispatch({ type: "ADD", payload: video });
+  // setVideos([[...videos, { ...video, id: videos.length + 1 }]])
+  // }
+  // function deleteVideo(id) {
+  //   dispatch({ type: "DELETE", payload: id });
+  // setVideos(videos.filter((video) => video.id !== id));
+  // }
   function editVideo(id) {
     setEditableVideo(videos.find((video) => video.id === id));
   }
-  function updateVideo(video) {
-    dispatch({ type: "UPDATE", payload: video });
-    // const index = videos.findIndex((vid) => vid.id === video.id);
-    // const newVideos = [...videos];
-    // newVideos.splice(index, 1, video);
-    // setVideos(newVideos);
-  }
+  // function updateVideo(video) {
+  //   dispatch({ type: "UPDATE", payload: video });
+  //   const index = videos.findIndex((vid) => vid.id === video.id);
+  //   const newVideos = [...videos];
+  //   newVideos.splice(index, 1, video);
+  //   setVideos(newVideos);
+  // }
 
   return (
     <ThemeContext.Provider value={mode}>
-      <div className={`App ${mode}`}>
-        <button
-          onClick={() => {
-            setMode(mode === "darkMode" ? "lightMode" : "darkMode");
-          }}
-        >
-          {mode === "darkMode" ? "lightMode" : "darkMode"}
-        </button>
-        <AddVideo
-          addVideos={addVideos}
-          editableVideo={editableVideo}
-          updateVideo={updateVideo}
-        ></AddVideo>
-        <VideoList
-          deleteVideo={deleteVideo}
-          editVideo={editVideo}
-          videos={videos}
-        ></VideoList>
-      </div>
+      <VideosContext.Provider value={videos}>
+        <VideoDispatchContext.Provider value={dispatch}>
+          <div className={`App ${mode}`}>
+            <button
+              onClick={() => {
+                setMode(mode === "darkMode" ? "lightMode" : "darkMode");
+              }}
+            >
+              {mode === "darkMode" ? "lightMode" : "darkMode"}
+            </button>
+            <AddVideo editableVideo={editableVideo}></AddVideo>
+            <VideoList editVideo={editVideo}></VideoList>
+          </div>
+        </VideoDispatchContext.Provider>
+      </VideosContext.Provider>
     </ThemeContext.Provider>
   );
 }
