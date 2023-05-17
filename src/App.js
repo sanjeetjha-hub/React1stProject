@@ -4,10 +4,12 @@ import videoDB from "./data/data";
 import { useReducer, useState } from "react";
 import AddVideo from "./components/AddVideo";
 import VideoList from "./components/VideoList";
+import ThemeContext from "./Context/ThemeContext";
 
 export default function Gallery() {
   const [editableVideo, setEditableVideo] = useState(null);
 
+  const [mode, setMode] = useState("darkMode");
   function videoReducer(videos, action) {
     switch (action.type) {
       case "ADD":
@@ -46,18 +48,28 @@ export default function Gallery() {
     // newVideos.splice(index, 1, video);
     // setVideos(newVideos);
   }
+
   return (
-    <div className="App">
-      <AddVideo
-        addVideos={addVideos}
-        editableVideo={editableVideo}
-        updateVideo={updateVideo}
-      ></AddVideo>
-      <VideoList
-        deleteVideo={deleteVideo}
-        editVideo={editVideo}
-        videos={videos}
-      ></VideoList>
-    </div>
+    <ThemeContext.Provider value={mode}>
+      <div className={`App ${mode}`}>
+        <button
+          onClick={() => {
+            setMode(mode === "darkMode" ? "lightMode" : "darkMode");
+          }}
+        >
+          {mode === "darkMode" ? "lightMode" : "darkMode"}
+        </button>
+        <AddVideo
+          addVideos={addVideos}
+          editableVideo={editableVideo}
+          updateVideo={updateVideo}
+        ></AddVideo>
+        <VideoList
+          deleteVideo={deleteVideo}
+          editVideo={editVideo}
+          videos={videos}
+        ></VideoList>
+      </div>
+    </ThemeContext.Provider>
   );
 }

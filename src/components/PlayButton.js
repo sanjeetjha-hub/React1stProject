@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./PLayButton.css";
+import ThemeContext from "../Context/ThemeContext";
 function PlyButton({ onPlay, onPause }) {
+  const theme = useContext(ThemeContext);
   const [play, setPlay] = useState(false);
 
   function handleClick(e) {
@@ -16,7 +18,9 @@ function PlyButton({ onPlay, onPause }) {
   }
   return (
     <>
-      <button onClick={handleClick}>{play ? "Pause ⏸️" : "Play ▶️"}</button>
+      <button className={theme} onClick={handleClick}>
+        {play ? "Pause ⏸️" : "Play ▶️"}
+      </button>
     </>
   );
 }
