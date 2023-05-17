@@ -1,28 +1,50 @@
 import "./App.css";
 import "./components/Video";
 import videoDB from "./data/data";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import AddVideo from "./components/AddVideo";
 import VideoList from "./components/VideoList";
 
 export default function Gallery() {
-  const [videos, setVideos] = useState(videoDB);
   const [editableVideo, setEditableVideo] = useState(null);
 
+  function videoReducer(videos, action) {
+    switch (action.type) {
+      case "ADD":
+        return [...videos, { ...action.payload, id: videos.length + 1 }];
+      case "DELETE":
+        return videos.filter((video) => video.id !== action.payload);
+      case "UPDATE":
+        const index = videos.findIndex((vid) => vid.id === action.payload.id);
+        const newVideos = [...videos];
+        newVideos.splice(index, 1, action.payload);
+        setEditableVideo(null);
+        return newVideos;
+      default:
+        return videos;
+    }
+  }
+
+  const [videos, dispatch] = useReducer(videoReducer, videoDB);
+  // const [videos, setVideos] = useState(videoDB);
+
   function addVideos(video) {
-    setVideos([...videos, { ...video, id: videos.length + 1 }]);
+    dispatch({ type: "ADD", payload: video });
+    // setVideos([[...videos, { ...video, id: videos.length + 1 }]])
   }
   function deleteVideo(id) {
-    setVideos(videos.filter((video) => video.id !== id));
+    dispatch({ type: "DELETE", payload: id });
+    // setVideos(videos.filter((video) => video.id !== id));
   }
   function editVideo(id) {
     setEditableVideo(videos.find((video) => video.id === id));
   }
   function updateVideo(video) {
-    const index = videos.findIndex((vid) => vid.id === video.id);
-    const newVideos = [...videos];
-    newVideos.splice(index, 1, video);
-    setVideos(newVideos);
+    dispatch({ type: "UPDATE", payload: video });
+    // const index = videos.findIndex((vid) => vid.id === video.id);
+    // const newVideos = [...videos];
+    // newVideos.splice(index, 1, video);
+    // setVideos(newVideos);
   }
   return (
     <div className="App">
