@@ -1,35 +1,40 @@
-.title{
+.title {
     font-weight: bold;
     margin-bottom: 1em;
 }
-.channel, .view{
-    font-size: small;  
+
+.channel,
+.view {
+    font-size: small;
     margin-bottom: 0.2em;
 }
+
 .container {
     position: relative;
     width: 11em;
     float: left;
-    margin: 0 0.2em;
+    margin: 0.5em;
 }
 
-.container.darkMode{
-background-color: grey;
+.container.darkMode {
+    background-color: grey;
 }
 
-.container.lightMode{
+.container.lightMode {
     color: black;
-background-color: lightgray;
+    background-color: lightgray;
 }
 
-.close{
+.close {
     position: absolute;
     right: 1em;
 }
-.edit{
+
+.edit {
     position: absolute;
     right: 3em;
 }
-.pic img{
+
+.pic img {
     width: 100%;
 }
