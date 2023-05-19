@@ -14,10 +14,12 @@ function AddVideo({ editableVideo }) {
   const dispatch = useVideoDispatch();
   function handleSubmit(e) {
     e.preventDefault();
-    if (editableVideo) {
-      dispatch({ type: "UPDATE", payload: video });
-    } else {
-      dispatch({ type: "ADD", payload: video });
+    if (video.title && video.views) {
+      if (editableVideo) {
+        dispatch({ type: "UPDATE", payload: video });
+      } else {
+        dispatch({ type: "ADD", payload: video });
+      }
     }
 
     SetVideo(initialState);
@@ -29,25 +31,27 @@ function AddVideo({ editableVideo }) {
     if (editableVideo) SetVideo(editableVideo);
   }, [editableVideo]);
   return (
-    <form>
-      <input
-        type="text"
-        name="title"
-        onChange={handleChange}
-        placeholder="title"
-        value={video.title}
-      ></input>
-      <input
-        type="text"
-        name="views"
-        onChange={handleChange}
-        placeholder="views"
-        value={video.views}
-      ></input>
-      <button onClick={handleSubmit}>
-        {editableVideo ? "edit Video" : "Add Videos"}
-      </button>
-    </form>
+    <div className="flex-container">
+      <form>
+        <input
+          type="text"
+          name="title"
+          onChange={handleChange}
+          placeholder="title"
+          value={video.title}
+        ></input>
+        <input
+          type="text"
+          name="views"
+          onChange={handleChange}
+          placeholder="views"
+          value={video.views}
+        ></input>
+        <button onClick={handleSubmit}>
+          {editableVideo ? "edit Video" : "Add Videos"}
+        </button>
+      </form>
+    </div>
   );
 }
 

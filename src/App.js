@@ -63,6 +63,7 @@ export default function Gallery() {
             >
               {mode === "darkMode" ? "lightMode" : "darkMode"}
             </button>
+            <br></br>
             <AddVideo editableVideo={editableVideo}></AddVideo>
             <VideoList editVideo={editVideo}></VideoList>
           </div>

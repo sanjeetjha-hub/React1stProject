@@ -3,8 +3,7 @@
     margin-bottom: 1em;
 }
 .channel, .view{
-    font-size: small;
-   
+    font-size: small;  
     margin-bottom: 0.2em;
 }
 .container {
@@ -21,8 +20,6 @@ background-color: grey;
 .container.lightMode{
     color: black;
 background-color: lightgray;
-
-
 }
 
 .close{
@@ -32,4 +29,7 @@ background-color: lightgray;
 .edit{
     position: absolute;
     right: 3em;
+}
+.pic img{
+    width: 100%;
 }
