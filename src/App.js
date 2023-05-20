@@ -7,7 +7,7 @@ import VideoList from "./components/VideoList";
 import ThemeContext from "./Context/ThemeContext";
 import VideosContext from "./Context/VideosContext";
 import VideoDispatchContext from "./Context/VideoDispatchContext";
-
+import Counter from "./components/Counter";
 export default function Gallery() {
   const [editableVideo, setEditableVideo] = useState(null);
 
@@ -56,6 +56,7 @@ export default function Gallery() {
       <VideosContext.Provider value={videos}>
         <VideoDispatchContext.Provider value={dispatch}>
           <div className={`App ${mode}`}>
+            <Counter></Counter>
             <button
               onClick={() => {
                 setMode(mode === "darkMode" ? "lightMode" : "darkMode");

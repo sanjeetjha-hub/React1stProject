@@ -1,5 +1,5 @@
 .App{
-  width:100%;
+  width:auto;
   height:100vh;
 }
 
@@ -10,4 +10,8 @@
 .lightMode{
   background-color: white;
   color: black;
+}
+
+.App h1{
+  margin-left: 0.6em;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./AddVideo.css";
 import useVideoDispatch from "../hooks/VideoDispatch";
 
@@ -12,6 +12,8 @@ const initialState = {
 function AddVideo({ editableVideo }) {
   const [video, SetVideo] = useState(initialState);
   const dispatch = useVideoDispatch();
+  const inputref = useRef(null);
+
   function handleSubmit(e) {
     e.preventDefault();
     if (video.title && video.views) {
@@ -29,11 +31,13 @@ function AddVideo({ editableVideo }) {
   }
   useEffect(() => {
     if (editableVideo) SetVideo(editableVideo);
+    inputref.current.focus();
   }, [editableVideo]);
   return (
     <div className="flex-container">
       <form>
         <input
+          ref={inputref}
           type="text"
           name="title"
           onChange={handleChange}
