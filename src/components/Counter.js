@@ -1,7 +1,9 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import ThemeContext from "../Context/ThemeContext";
 
 function Counter() {
   const [number, setNumber] = useState(0);
+  const theme = useContext(ThemeContext);
   let num = useRef(0);
   function handleClick(e) {
     e.stopPropagation();
@@ -11,8 +13,10 @@ function Counter() {
   }
   return (
     <>
-      <h1 style={{ color: "grey" }}>{number}</h1>
-      <button onClick={handleClick}>Increment</button>
+      <div className="flex-container">
+        <h1 className={theme}>{number}</h1>
+        <button onClick={handleClick}>Increment</button>
+      </div>
     </>
   );
 }

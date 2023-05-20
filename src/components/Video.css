@@ -12,17 +12,18 @@
 .container {
     position: relative;
     width: 11em;
-    float: left;
     margin: 0.5em;
 }
 
 .container.darkMode {
     background-color: grey;
+    border: 1px solid yellow;
 }
 
 .container.lightMode {
     color: black;
     background-color: lightgray;
+    border: 1px solid black;
 }
 
 .close {

@@ -6,7 +6,7 @@ function VideoList({ dispatch, editVideo }) {
   const videos = useVideos();
   return (
     <>
-      <div className="flex-container">
+      <div id="videoDiv" className="flex-container">
         {videos.map((video) => (
           <Video
             key={video.id}
@@ -25,7 +25,6 @@ function VideoList({ dispatch, editVideo }) {
           </Video>
         ))}
       </div>
-
     </>
   );
 }

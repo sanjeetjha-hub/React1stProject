@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./AddVideo.css";
 import useVideoDispatch from "../hooks/VideoDispatch";
+import ThemeContext from "../Context/ThemeContext";
 
 const initialState = {
   channel: "CodeDost",
@@ -13,7 +14,7 @@ function AddVideo({ editableVideo }) {
   const [video, SetVideo] = useState(initialState);
   const dispatch = useVideoDispatch();
   const inputref = useRef(null);
-
+  const theme = useContext(ThemeContext);
   function handleSubmit(e) {
     e.preventDefault();
     if (video.title && video.views) {
@@ -35,7 +36,7 @@ function AddVideo({ editableVideo }) {
   }, [editableVideo]);
   return (
     <div className="flex-container">
-      <form>
+      <form className={theme}>
         <input
           ref={inputref}
           type="text"

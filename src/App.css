@@ -12,6 +12,18 @@
   color: black;
 }
 
-.App h1{
-  margin-left: 0.6em;
+.App h1 {
+  margin-left: 0.2em;
 }
+
+.outSideButtons{
+  margin-left: 1.5em;
+}
+
+h1.darkMode{
+  color:yellow;
+}
+h1.lightMode{
+  color: black;
+}
+

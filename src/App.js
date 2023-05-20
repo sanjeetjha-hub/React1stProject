@@ -56,15 +56,15 @@ export default function Gallery() {
       <VideosContext.Provider value={videos}>
         <VideoDispatchContext.Provider value={dispatch}>
           <div className={`App ${mode}`}>
-            <Counter></Counter>
             <button
+              className="outSideButtons"
               onClick={() => {
                 setMode(mode === "darkMode" ? "lightMode" : "darkMode");
               }}
             >
               {mode === "darkMode" ? "lightMode" : "darkMode"}
             </button>
-            <br></br>
+            <Counter></Counter>
             <AddVideo editableVideo={editableVideo}></AddVideo>
             <VideoList editVideo={editVideo}></VideoList>
           </div>

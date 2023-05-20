@@ -2,14 +2,19 @@
     display: flex;
     flex-wrap: wrap;
     margin: 1em;
+    margin-top: 0;;
 }
 
 input {
     margin: 1em;
 }
 
-form {
-    
+form.darkMode{
     margin: 0.5em;
-    border: 1px solid darkgrey;
+    border: 1px solid yellow;
+}
+
+form.lightMode{
+    margin: 0.5em;
+    border: 1px solid black;
 }
