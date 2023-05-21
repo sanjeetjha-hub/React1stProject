@@ -1,7 +1,9 @@
-import { useContext, useState } from "react";
+import { memo, useContext, useState } from "react";
 import "./PLayButton.css";
 import ThemeContext from "../Context/ThemeContext";
-function PlyButton({ onPlay, onPause }) {
+
+const PlyButton = memo(function PlyButton({ onPlay, onPause }) {
+  console.log("render play button");
   const theme = useContext(ThemeContext);
   const [play, setPlay] = useState(false);
 
@@ -23,6 +25,6 @@ function PlyButton({ onPlay, onPause }) {
       </button>
     </>
   );
-}
+});
 
 export default PlyButton;

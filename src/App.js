@@ -1,6 +1,6 @@
 import "./App.css";
 import "./components/Video";
-import { useReducer, useState } from "react";
+import { useCallback, useReducer, useState } from "react";
 import AddVideo from "./components/AddVideo";
 import VideoList from "./components/VideoList";
 import ThemeContext from "./Context/ThemeContext";
@@ -8,6 +8,7 @@ import VideosContext from "./Context/VideosContext";
 import VideoDispatchContext from "./Context/VideoDispatchContext";
 import Counter from "./components/Counter";
 export default function Gallery() {
+  console.log("render app");
   const [editableVideo, setEditableVideo] = useState(null);
 
   const [mode, setMode] = useState("darkMode");
@@ -41,9 +42,13 @@ export default function Gallery() {
   //   dispatch({ type: "DELETE", payload: id });
   // setVideos(videos.filter((video) => video.id !== id));
   // }
-  function editVideo(id) {
-    setEditableVideo(videos.find((video) => video.id === id));
-  }
+  const editVideo = useCallback(
+    function editVideo(id) {
+      setEditableVideo(videos.find((video) => video.id === id));
+    },
+    [videos]
+  );
+
   // function updateVideo(video) {
   //   dispatch({ type: "UPDATE", payload: video });
   //   const index = videos.findIndex((vid) => vid.id === video.id);
