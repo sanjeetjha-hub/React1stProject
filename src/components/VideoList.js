@@ -1,9 +1,23 @@
 import Video from "./Video";
 import PlayButton from "./PlayButton";
+import axios from "axios";
+import { useEffect } from "react";
+import useVideoDispatch from "../hooks/VideoDispatch";
 import useVideos from "../hooks/Videos";
 
-function VideoList({ dispatch, editVideo }) {
+function VideoList({ editVideo }) {
   const videos = useVideos();
+  const dispatch = useVideoDispatch();
+  const url = "https://my.api.mockaroo.com/videos.json?key=ba9689e0";
+  async function loadVideos() {
+    const res = await axios.get(url);
+    console.log(res.data);
+    dispatch({ type: "LOAD", payload: res.data });
+  }
+
+  useEffect(() => {
+    loadVideos();
+  }, []);
   return (
     <>
       <div id="videoDiv" className="flex-container">

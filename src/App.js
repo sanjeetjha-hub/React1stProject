@@ -1,6 +1,5 @@
 import "./App.css";
 import "./components/Video";
-import videoDB from "./data/data";
 import { useReducer, useState } from "react";
 import AddVideo from "./components/AddVideo";
 import VideoList from "./components/VideoList";
@@ -24,12 +23,14 @@ export default function Gallery() {
         newVideos.splice(index, 1, action.payload);
         setEditableVideo(null);
         return newVideos;
+      case "LOAD":
+        return action.payload;
       default:
         return videos;
     }
   }
 
-  const [videos, dispatch] = useReducer(videoReducer, videoDB);
+  const [videos, dispatch] = useReducer(videoReducer, []);
   // const [videos, setVideos] = useState(videoDB);
 
   // function addVideos(video) {
