@@ -2,7 +2,7 @@ import { useCallback, useContext, useMemo, useRef, useState } from "react";
 import ThemeContext from "../Context/ThemeContext";
 
 function Counter() {
-  const [number, setNumber] = useState(40);
+  const [number, setNumber] = useState(10);
   const theme = useContext(ThemeContext);
   let num = useRef(0);
   function handleClick(e) {
@@ -25,7 +25,7 @@ function Counter() {
         <h1 className={theme}>{number}</h1>
         <button onClick={handleClick}>Increment</button>
         <br></br>
-        <h1 className={theme}>{fibMemoized}</h1>
+        <h1 className={theme}>'Fib:' {fibMemoized}</h1>
       </div>
     </>
   );
