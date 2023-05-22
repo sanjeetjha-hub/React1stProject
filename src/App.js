@@ -1,16 +1,18 @@
 import "./App.css";
 import "./components/Video";
-import { useCallback, useReducer, useState } from "react";
+import { useCallback, useReducer, useRef, useState } from "react";
 import AddVideo from "./components/AddVideo";
 import VideoList from "./components/VideoList";
 import ThemeContext from "./Context/ThemeContext";
 import VideosContext from "./Context/VideosContext";
 import VideoDispatchContext from "./Context/VideoDispatchContext";
 import Counter from "./components/Counter";
+import VideoDb from "./data/data";
+
 export default function Gallery() {
   console.log("render app");
   const [editableVideo, setEditableVideo] = useState(null);
-
+  const inputRef = useRef(null);
   const [mode, setMode] = useState("darkMode");
   function videoReducer(videos, action) {
     switch (action.type) {
@@ -31,7 +33,7 @@ export default function Gallery() {
     }
   }
 
-  const [videos, dispatch] = useReducer(videoReducer, []);
+  const [videos, dispatch] = useReducer(videoReducer, VideoDb);
   // const [videos, setVideos] = useState(videoDB);
 
   // function addVideos(video) {
@@ -62,6 +64,7 @@ export default function Gallery() {
       <VideosContext.Provider value={videos}>
         <VideoDispatchContext.Provider value={dispatch}>
           <div className={`App ${mode}`}>
+            <button onClick={() => { inputRef.current.JumpTo() }}>Focus</button>
             <button
               className="outSideButtons"
               onClick={() => {
@@ -71,7 +74,7 @@ export default function Gallery() {
               {mode === "darkMode" ? "lightMode" : "darkMode"}
             </button>
             <Counter></Counter>
-            <AddVideo editableVideo={editableVideo}></AddVideo>
+            <AddVideo ref={inputRef} editableVideo={editableVideo}></AddVideo>
             <VideoList editVideo={editVideo}></VideoList>
           </div>
         </VideoDispatchContext.Provider>

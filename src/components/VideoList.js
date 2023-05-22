@@ -21,7 +21,7 @@ function VideoList({ editVideo }) {
   useEffect(() => {
     loadVideos();
     console.log("Video Rendered");
-  });
+  }, []);
   const play = useCallback(() => console.log("Play"), []);
   const pause = useCallback(() => console.log("Pause"), []);
   const memoPlayButton = useMemo(

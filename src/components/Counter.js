@@ -24,8 +24,7 @@ function Counter() {
       <div className="flex-container">
         <h1 className={theme}>{number}</h1>
         <button onClick={handleClick}>Increment</button>
-        <br></br>
-        <h1 className={theme}>'Fib:' {fibMemoized}</h1>
+        <h1 className={theme}>Fib of {number}: {fibMemoized}</h1>
       </div>
     </>
   );

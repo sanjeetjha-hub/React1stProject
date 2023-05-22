@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState } from "react";
 import "./AddVideo.css";
 import useVideoDispatch from "../hooks/VideoDispatch";
 import ThemeContext from "../Context/ThemeContext";
@@ -10,10 +10,19 @@ const initialState = {
   title: "",
   views: "",
 };
-function AddVideo({ editableVideo }) {
+
+const AddVideo = forwardRef(function AddVideo({ editableVideo }, ref) {
   const [video, SetVideo] = useState(initialState);
   const dispatch = useVideoDispatch();
-  const inputref = useRef(null);
+  const iRef = useRef(null);
+  useImperativeHandle(ref, () => {                    //Limit the Access to The ref declared in parent
+    return {
+      JumpTo() {
+        iRef.current.focus();
+      }
+    }
+  })
+
   const theme = useContext(ThemeContext);
   function handleSubmit(e) {
     e.preventDefault();
@@ -27,18 +36,19 @@ function AddVideo({ editableVideo }) {
 
     SetVideo(initialState);
   }
+
   function handleChange(e) {
     SetVideo({ ...video, [e.target.name]: e.target.value });
   }
   useEffect(() => {
     if (editableVideo) SetVideo(editableVideo);
-    inputref.current.focus();
+    // inputref.current.focus();
   }, [editableVideo]);
   return (
     <div className="flex-container">
       <form className={theme}>
         <input
-          ref={inputref}
+          ref={iRef}
           type="text"
           name="title"
           onChange={handleChange}
@@ -58,6 +68,6 @@ function AddVideo({ editableVideo }) {
       </form>
     </div>
   );
-}
+})
 
 export default AddVideo;
